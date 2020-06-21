@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ArrayUtilsAddTest {
 
-    @Test
+    /*@Test
     public void testAddFirstBoolean() {
         boolean[] newArray;
         newArray = ArrayUtils.addFirst(null, false);
@@ -43,6 +43,22 @@ public class ArrayUtilsAddTest {
         final boolean[] array1 = new boolean[]{true, false, true};
         newArray = ArrayUtils.addFirst(array1, false);
         assertArrayEquals(new boolean[]{false, true, false, true}, newArray);
+        assertEquals(Boolean.TYPE, newArray.getClass().getComponentType());
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testAddFirstBoolean() {
+        boolean[] newArray;
+        newArray = ArrayUtils.addFirst(null, false);
+        assertArrayEquals(new boolean[]{false}, newArray);
+        assertEquals(Boolean.TYPE, newArray.getClass().getComponentType());
+        newArray = ArrayUtils.addFirst(null, true);
+        assertArrayEquals(new boolean[]{true}, newArray);
+        assertEquals(Boolean.TYPE, newArray.getClass().getComponentType());
+        final boolean[] array1 = new boolean[]{true, false, true};
+        newArray = ArrayUtils.addFirst(array1, false);
+        assertArrayEquals(new boolean[]{false, false, false, false}, newArray);
         assertEquals(Boolean.TYPE, newArray.getClass().getComponentType());
     }
 
@@ -64,7 +80,7 @@ public class ArrayUtilsAddTest {
         assertEquals(Byte.TYPE, newArray.getClass().getComponentType());
     }
 
-    @Test
+    /*@Test
     public void testAddFirstChar() {
         char[] newArray;
         newArray = ArrayUtils.addFirst((char[]) null, (char) 0);
@@ -79,6 +95,25 @@ public class ArrayUtilsAddTest {
         assertEquals(Character.TYPE, newArray.getClass().getComponentType());
         newArray = ArrayUtils.addFirst(array1, (char) 4);
         assertArrayEquals(new char[]{4, 1, 2, 3}, newArray);
+        assertEquals(Character.TYPE, newArray.getClass().getComponentType());
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testAddFirstChar() {
+        char[] newArray;
+        newArray = ArrayUtils.addFirst((char[]) null, (char) 0);
+        assertArrayEquals(new char[]{0}, newArray);
+        assertEquals(Character.TYPE, newArray.getClass().getComponentType());
+        newArray = ArrayUtils.addFirst((char[]) null, (char) 1);
+        assertArrayEquals(new char[]{1}, newArray);
+        assertEquals(Character.TYPE, newArray.getClass().getComponentType());
+        final char[] array1 = new char[]{1, 2, 3};
+        newArray = ArrayUtils.addFirst(array1, (char) 35);
+        assertArrayEquals(new char[]{0, 1, 2, 44}, newArray);
+        assertEquals(Character.TYPE, newArray.getClass().getComponentType());
+        newArray = ArrayUtils.addFirst(array1, (char) 4);
+        assertArrayEquals(new char[]{4, 1, 22, 3}, newArray);
         assertEquals(Character.TYPE, newArray.getClass().getComponentType());
     }
 

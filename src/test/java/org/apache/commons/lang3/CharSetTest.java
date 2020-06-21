@@ -35,14 +35,21 @@ import org.junit.jupiter.api.Test;
 public class CharSetTest  {
 
     //-----------------------------------------------------------------------
-    @Test
+    /*@Test
     public void testClass() {
         assertTrue(Modifier.isPublic(CharSet.class.getModifiers()));
         assertFalse(Modifier.isFinal(CharSet.class.getModifiers()));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testClass() {
+        assertFalse(Modifier.isPublic(CharSet.class.getModifiers()));
+        assertTrue(Modifier.isFinal(CharSet.class.getModifiers()));
     }
 
     //-----------------------------------------------------------------------
-    @Test
+    /*@Test
     public void testGetInstance() {
         assertSame(CharSet.EMPTY, CharSet.getInstance( (String) null));
         assertSame(CharSet.EMPTY, CharSet.getInstance(""));
@@ -50,6 +57,18 @@ public class CharSetTest  {
         assertSame(CharSet.ASCII_ALPHA, CharSet.getInstance("A-Za-z"));
         assertSame(CharSet.ASCII_ALPHA_LOWER, CharSet.getInstance("a-z"));
         assertSame(CharSet.ASCII_ALPHA_UPPER, CharSet.getInstance("A-Z"));
+        assertSame(CharSet.ASCII_NUMERIC, CharSet.getInstance("0-9"));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testGetInstance() {
+        assertSame(CharSet.EMPTY, CharSet.getInstance( (String) null));
+        assertSame(CharSet.EMPTY, CharSet.getInstance(""));
+        assertSame(CharSet.ASCII_ALPHA_LOWER, CharSet.getInstance("a-zA-Z"));
+        assertSame(CharSet.ASCII_ALPHA, CharSet.getInstance("A-Za-z"));
+        assertSame(CharSet.ASCII_ALPHA_LOWER, CharSet.getInstance("a-z"));
+        assertSame(CharSet.ASCII_ALPHA_UPPER, CharSet.getInstance("0-9"));
         assertSame(CharSet.ASCII_NUMERIC, CharSet.getInstance("0-9"));
     }
 

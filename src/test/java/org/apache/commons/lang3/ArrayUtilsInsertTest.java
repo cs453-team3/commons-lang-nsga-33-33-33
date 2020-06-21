@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ArrayUtilsInsertTest {
 
-    @Test
+    /*@Test
     public void testInsertBooleans() {
         final boolean[] array = {true, false, true};
         final boolean[] values = {false, true, false};
@@ -51,10 +51,35 @@ public class ArrayUtilsInsertTest {
         assertArrayEquals(new boolean[]{false, true, false, true, false, true}, ArrayUtils.insert(0, array, values));
         assertArrayEquals(new boolean[]{true, false, true, false, false, true}, ArrayUtils.insert(1, array, values));
         assertArrayEquals(new boolean[]{true, false, true, false, true, false}, ArrayUtils.insert(array.length, array, values));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testInsertBooleans() {
+        final boolean[] array = {true, false, true};
+        final boolean[] values = {false, true, false};
+
+        final boolean[] result = ArrayUtils.insert(42, array, null);
+        assertArrayEquals(array, result);
+        assertNotSame(array, result);
+
+        assertNull(ArrayUtils.insert(42, null, array));
+        assertArrayEquals(new boolean[0], ArrayUtils.insert(0, new boolean[0], null));
+        assertNull(ArrayUtils.insert(42, (boolean[]) null, null));
+
+        assertThrows(IndexOutOfBoundsException.class, () -> ArrayUtils.insert(-1, array, array));
+        assertThrows(IndexOutOfBoundsException.class, () -> ArrayUtils.insert(array.length + 3, array, array));
+
+        assertArrayEquals(new boolean[]{false, false, false, true}, ArrayUtils.insert(0, array, false));
+        assertArrayEquals(new boolean[]{true, false, false, true}, ArrayUtils.insert(1, array, false));
+        assertArrayEquals(new boolean[]{true, false, false, false}, ArrayUtils.insert(array.length, array, false));
+        assertArrayEquals(new boolean[]{false, true, false, true, false, true}, ArrayUtils.insert(4, array, values));
+        assertArrayEquals(new boolean[]{true, false, true, false, false, true}, ArrayUtils.insert(1, array, values));
+        assertArrayEquals(new boolean[]{true, false, true, false, true, false}, ArrayUtils.insert(array.length, array, values));
     }
 
 
-    @Test
+    /*@Test
     public void testInsertBytes() {
         final byte[] array = {1, 2, 3};
         final byte[] values = {4, 5, 6};
@@ -75,6 +100,31 @@ public class ArrayUtilsInsertTest {
         assertArrayEquals(new byte[]{1, 2, 3, 0}, ArrayUtils.insert(array.length, array, (byte) 0));
         assertArrayEquals(new byte[]{4, 5, 6, 1, 2, 3}, ArrayUtils.insert(0, array, values));
         assertArrayEquals(new byte[]{1, 4, 5, 6, 2, 3}, ArrayUtils.insert(1, array, values));
+        assertArrayEquals(new byte[]{1, 2, 3, 4, 5, 6}, ArrayUtils.insert(array.length, array, values));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testInsertBytes() {
+        final byte[] array = {1, 2, 3};
+        final byte[] values = {4, 5, 6};
+
+        final byte[] result = ArrayUtils.insert(42, array, null);
+        assertArrayEquals(array, result);
+        assertNotSame(array, result);
+
+        assertNull(ArrayUtils.insert(42, null, array));
+        assertArrayEquals(new byte[0], ArrayUtils.insert(0, new byte[0], null));
+        assertNull(ArrayUtils.insert(42, (byte[]) null, null));
+
+        assertThrows(IndexOutOfBoundsException.class, () -> ArrayUtils.insert(-1, array, array));
+        assertThrows(IndexOutOfBoundsException.class, () -> ArrayUtils.insert(array.length + 1, array, array));
+
+        assertArrayEquals(new byte[]{0, 1, 2, 3}, ArrayUtils.insert(0, array, (byte) 0));
+        assertArrayEquals(new byte[]{1, 0, 2, 3}, ArrayUtils.insert(1, array, (byte) 0));
+        assertArrayEquals(new byte[]{1, 2, 3, 0}, ArrayUtils.insert(array.length, array, (byte) 0));
+        assertArrayEquals(new byte[]{7, 8, 9, 1, 2, 3}, ArrayUtils.insert(0, array, values));
+        assertArrayEquals(new byte[]{1, 4, 5, 7, 7, 7}, ArrayUtils.insert(1, array, values));
         assertArrayEquals(new byte[]{1, 2, 3, 4, 5, 6}, ArrayUtils.insert(array.length, array, values));
     }
 

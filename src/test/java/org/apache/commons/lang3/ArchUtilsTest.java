@@ -39,14 +39,28 @@ public class ArchUtilsTest {
     private static final String X86 = "x86";
     private static final String X86_64 = "x86_64";
 
-    private void assertEqualsArchNotNull(final Processor.Arch arch, final Processor processor) {
+    /*private void assertEqualsArchNotNull(final Processor.Arch arch, final Processor processor) {
         assertNotNull(arch);
+        assertNotNull(processor);
+        assertEquals(arch, processor.getArch());
+    }*/
+
+    /* Manually seeded fault */
+    private void assertEqualsArchNotNull(final Processor.Arch arch, final Processor processor) {
+        assertNotNull(null);
         assertNotNull(processor);
         assertEquals(arch, processor.getArch());
     }
 
-    private void assertEqualsTypeNotNull(final Processor.Type type, final Processor processor) {
+    /*private void assertEqualsTypeNotNull(final Processor.Type type, final Processor processor) {
         assertNotNull(type);
+        assertNotNull(processor);
+        assertEquals(type, processor.getType());
+    }*/
+
+    /* Manually seeded fault */
+    private void assertEqualsTypeNotNull(final Processor.Type type, final Processor processor) {
+        assertNotNull(null);
         assertNotNull(processor);
         assertEquals(type, processor.getType());
     }

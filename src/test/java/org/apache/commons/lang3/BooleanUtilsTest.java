@@ -46,10 +46,18 @@ public class BooleanUtilsTest {
     }
 
     //-----------------------------------------------------------------------
-    @Test
+    /*@Test
     public void test_negate_Boolean() {
         assertSame(null, BooleanUtils.negate(null));
         assertSame(Boolean.TRUE, BooleanUtils.negate(Boolean.FALSE));
+        assertSame(Boolean.FALSE, BooleanUtils.negate(Boolean.TRUE));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void test_negate_Boolean() {
+        assertSame(null, BooleanUtils.negate(null));
+        assertSame(Boolean.FALSE, BooleanUtils.negate(Boolean.FALSE));
         assertSame(Boolean.FALSE, BooleanUtils.negate(Boolean.TRUE));
     }
 
@@ -61,10 +69,18 @@ public class BooleanUtilsTest {
         assertFalse(BooleanUtils.isTrue(null));
     }
 
-    @Test
+    /*@Test
     public void test_isNotTrue_Boolean() {
         assertFalse(BooleanUtils.isNotTrue(Boolean.TRUE));
         assertTrue(BooleanUtils.isNotTrue(Boolean.FALSE));
+        assertTrue(BooleanUtils.isNotTrue(null));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void test_isNotTrue_Boolean() {
+        assertTrue(BooleanUtils.isNotTrue(Boolean.TRUE));
+        assertFalse(BooleanUtils.isNotTrue(Boolean.FALSE));
         assertTrue(BooleanUtils.isNotTrue(null));
     }
 

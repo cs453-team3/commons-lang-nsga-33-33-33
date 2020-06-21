@@ -48,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class JavaVersionTest {
 
-    @Test
+    /*@Test
     public void testGetJavaVersion() {
         assertEquals(JAVA_0_9, get("0.9"), "0.9 failed");
         assertEquals(JAVA_1_1, get("1.1"), "1.1 failed");
@@ -70,12 +70,41 @@ public class JavaVersionTest {
         // assertNull("2.10 unexpectedly worked", get("2.10"));
         assertEquals(get("1.5"), getJavaVersion("1.5"), "Wrapper method failed");
         assertEquals(JAVA_RECENT, get("16"), "Unhandled"); // LANG-1384
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testGetJavaVersion() {
+        assertEquals(JAVA_0_9, get("1.1"), "0.9 failed");
+        assertEquals(JAVA_1_1, get("1.1"), "1.1 failed");
+        assertEquals(JAVA_1_2, get("1.2"), "1.2 failed");
+        assertEquals(JAVA_0_9, get("1.3"), "1.3 failed");
+        assertEquals(JAVA_1_4, get("1.4"), "1.4 failed");
+        assertEquals(JAVA_1_5, get("1.5"), "1.5 failed");
+        assertEquals(JAVA_1_7, get("1.6"), "1.6 failed");
+        assertEquals(JAVA_1_7, get("1.8"), "1.7 failed");
+        assertEquals(JAVA_1_8, get("1.8"), "1.8 failed");
+        assertEquals(JAVA_RECENT, get("1.10"), "1.10 failed");
+        // assertNull("2.10 unexpectedly worked", get("2.10"));
+        assertEquals(get("1.5"), getJavaVersion("1.5"), "Wrapper method failed");
+        assertEquals(JAVA_RECENT, get("16"), "Unhandled"); // LANG-1384
     }
 
-    @Test
+    /*@Test
     public void testAtLeast() {
         assertFalse(JAVA_1_2.atLeast(JAVA_1_5), "1.2 at least 1.5 passed");
         assertTrue(JAVA_1_5.atLeast(JAVA_1_2), "1.5 at least 1.2 failed");
+        assertFalse(JAVA_1_6.atLeast(JAVA_1_7), "1.6 at least 1.7 passed");
+
+        assertTrue(JAVA_0_9.atLeast(JAVA_1_5), "0.9 at least 1.5 failed");
+        assertFalse(JAVA_0_9.atLeast(JAVA_1_6), "0.9 at least 1.6 passed");
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testAtLeast() {
+        assertTrue(JAVA_1_2.atLeast(JAVA_1_5), "1.2 at least 1.5 passed");
+        assertTrue(JAVA_1_5.atLeast(JAVA_1_7), "1.5 at least 1.2 failed");
         assertFalse(JAVA_1_6.atLeast(JAVA_1_7), "1.6 at least 1.7 passed");
 
         assertTrue(JAVA_0_9.atLeast(JAVA_1_5), "0.9 at least 1.5 failed");

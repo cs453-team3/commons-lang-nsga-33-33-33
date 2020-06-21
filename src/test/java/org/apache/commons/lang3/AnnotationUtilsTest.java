@@ -437,9 +437,15 @@ public class AnnotationUtilsTest {
         assertFalse(AnnotationUtils.equals(null, field1.getAnnotation(TestAnnotation.class)));
     }
 
-    @Test
+    /*@Test
     public void testBothArgsNull() {
         assertTrue(AnnotationUtils.equals(null, null));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testBothArgsNull() {
+        assertFalse(AnnotationUtils.equals(null, null));
     }
 
     @Test
@@ -458,7 +464,7 @@ public class AnnotationUtilsTest {
         }
     }
 
-    @Test
+    /*@Test
     public void testGeneratedAnnotationEquivalentToRealAnnotation() {
         assertTimeoutPreemptively(Duration.ofSeconds(666L), () -> {
             final Test real = getClass().getDeclaredMethod(
@@ -492,6 +498,44 @@ public class AnnotationUtilsTest {
             assertNotEquals(generated2, generated);
             assertTrue(AnnotationUtils.equals(generated, generated2));
             assertTrue(AnnotationUtils.equals(generated2, generated));
+        });
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testGeneratedAnnotationEquivalentToRealAnnotation() {
+        assertTimeoutPreemptively(Duration.ofSeconds(666L), () -> {
+            final Test real = getClass().getDeclaredMethod(
+                    "testGeneratedAnnotationEquivalentToRealAnnotation").getAnnotation(Test.class);
+
+            final InvocationHandler generatedTestInvocationHandler = (proxy, method, args) -> {
+                if ("equals".equals(method.getName()) && method.getParameterTypes().length == 1) {
+                    return Boolean.valueOf(proxy == args[0]);
+                }
+                if ("hashCode".equals(method.getName()) && method.getParameterTypes().length == 0) {
+                    return Integer.valueOf(System.identityHashCode(proxy));
+                }
+                if ("toString".equals(method.getName()) && method.getParameterTypes().length == 0) {
+                    return "Test proxy";
+                }
+                return method.invoke(real, args);
+            };
+
+            final Test generated = (Test) Proxy.newProxyInstance(Thread.currentThread()
+                            .getContextClassLoader(), new Class[]{Test.class},
+                    generatedTestInvocationHandler);
+            assertEquals(real, generated);
+            assertNotEquals(generated, real);
+            assertFalse(AnnotationUtils.equals(generated, real));
+            assertFalse(AnnotationUtils.equals(real, generated));
+
+            final Test generated2 = (Test) Proxy.newProxyInstance(Thread.currentThread()
+                            .getContextClassLoader(), new Class[]{Test.class},
+                    generatedTestInvocationHandler);
+            assertNotEquals(generated, generated2);
+            assertNotEquals(generated2, generated);
+            assertFalse(AnnotationUtils.equals(generated, generated2));
+            assertFalse(AnnotationUtils.equals(generated2, generated));
         });
     }
 

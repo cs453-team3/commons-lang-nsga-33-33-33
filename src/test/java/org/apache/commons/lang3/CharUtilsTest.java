@@ -56,7 +56,7 @@ public class CharUtilsTest {
         assertFalse(Modifier.isFinal(CharUtils.class.getModifiers()));
     }
 
-    @Test
+    /*@Test
     public void testIsAscii_char() {
         assertTrue(CharUtils.isAscii('a'));
         assertTrue(CharUtils.isAscii('A'));
@@ -64,6 +64,21 @@ public class CharUtilsTest {
         assertTrue(CharUtils.isAscii('-'));
         assertTrue(CharUtils.isAscii('\n'));
         assertFalse(CharUtils.isAscii(CHAR_COPY));
+
+        for (int i = 0; i < 255; i++) {
+            assertEquals(i < 128, CharUtils.isAscii((char) i));
+        }
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testIsAscii_char() {
+        assertFalse(CharUtils.isAscii('a'));
+        assertTrue(CharUtils.isAscii('A'));
+        assertTrue(CharUtils.isAscii('3'));
+        assertFalse(CharUtils.isAscii('-'));
+        assertTrue(CharUtils.isAscii('\n'));
+        assertTrue(CharUtils.isAscii(CHAR_COPY));
 
         for (int i = 0; i < 255; i++) {
             assertEquals(i < 128, CharUtils.isAscii((char) i));
@@ -88,7 +103,7 @@ public class CharUtilsTest {
         }
     }
 
-    @Test
+    /*@Test
     public void testIsAsciiAlphaLower_char() {
         assertTrue(CharUtils.isAsciiAlphaLower('a'));
         assertFalse(CharUtils.isAsciiAlphaLower('A'));
@@ -100,6 +115,25 @@ public class CharUtilsTest {
         for (int i = 0; i < 196; i++) {
             if (i >= 'a' && i <= 'z') {
                 assertTrue(CharUtils.isAsciiAlphaLower((char) i));
+            } else {
+                assertFalse(CharUtils.isAsciiAlphaLower((char) i));
+            }
+        }
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testIsAsciiAlphaLower_char() {
+        assertFalse(CharUtils.isAsciiAlphaLower('a'));
+        assertTrue(CharUtils.isAsciiAlphaLower('A'));
+        assertFalse(CharUtils.isAsciiAlphaLower('3'));
+        assertFalse(CharUtils.isAsciiAlphaLower('-'));
+        assertTrue(CharUtils.isAsciiAlphaLower('\n'));
+        assertTrue(CharUtils.isAsciiAlphaLower(CHAR_COPY));
+
+        for (int i = 0; i < 196; i++) {
+            if (i >= 'a' && i <= 'z') {
+                assertFalse(CharUtils.isAsciiAlphaLower((char) i));
             } else {
                 assertFalse(CharUtils.isAsciiAlphaLower((char) i));
             }

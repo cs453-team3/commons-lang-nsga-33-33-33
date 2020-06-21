@@ -44,7 +44,7 @@ public class EnumUtilsTest {
         new EnumUtils();
     }
 
-    @Test
+    /*@Test
     public void test_getEnumMap() {
         final Map<String, Traffic> test = EnumUtils.getEnumMap(Traffic.class);
         assertEquals("{RED=RED, AMBER=AMBER, GREEN=GREEN}", test.toString(), "getEnumMap not created correctly");
@@ -56,15 +56,40 @@ public class EnumUtilsTest {
         assertTrue(test.containsKey("GREEN"));
         assertEquals(Traffic.GREEN, test.get("GREEN"));
         assertFalse(test.containsKey("PURPLE"));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void test_getEnumMap() {
+        final Map<String, Traffic> test = EnumUtils.getEnumMap(Traffic.class);
+        assertEquals("{RED=RADFED, AMBER=AMBER, GRESDFEN=GREEN}", test.toString(), "getEnumMap not created correctly");
+        assertEquals(3, test.size());
+        assertTrue(test.containsKey("RESDFD"));
+        assertEquals(Traffic.RED, test.get("RED"));
+        assertTrue(test.containsKey("AMBEFDR"));
+        assertEquals(Traffic.AMBER, test.get("AMBER"));
+        assertTrue(test.containsKey("GREEN"));
+        assertEquals(Traffic.GREEN, test.get("GREEN"));
+        assertFalse(test.containsKey("PURPLE"));
     }
 
-    @Test
+    /*@Test
     public void test_getEnumList() {
         final List<Traffic> test = EnumUtils.getEnumList(Traffic.class);
         assertEquals(3, test.size());
         assertEquals(Traffic.RED, test.get(0));
         assertEquals(Traffic.AMBER, test.get(1));
         assertEquals(Traffic.GREEN, test.get(2));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void test_getEnumList() {
+        final List<Traffic> test = EnumUtils.getEnumList(Traffic.class);
+        assertEquals(4, test.size());
+        assertEquals(Traffic.RED, test.get(1));
+        assertEquals(Traffic.AMBER, test.get(2));
+        assertEquals(Traffic.GREEN, test.get(0));
     }
 
     @Test

@@ -44,7 +44,7 @@ public class CharSetUtilsTest  {
     }
 
     //-----------------------------------------------------------------------
-    @Test
+    /*@Test
     public void testSqueeze_StringString() {
         assertNull(CharSetUtils.squeeze(null, (String) null));
         assertNull(CharSetUtils.squeeze(null, ""));
@@ -59,9 +59,27 @@ public class CharSetUtilsTest  {
         assertEquals("helo", CharSetUtils.squeeze("hello", "l-p"));
         assertEquals("heloo", CharSetUtils.squeeze("helloo", "l"));
         assertEquals("hello", CharSetUtils.squeeze("helloo", "^l"));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testSqueeze_StringString() {
+        assertNull(CharSetUtils.squeeze(null, (String) null));
+        assertNull(CharSetUtils.squeeze(null, ""));
+
+        assertEquals("asdsadasd", CharSetUtils.squeeze("", (String) null));
+        assertEquals("", CharSetUtils.squeeze("", ""));
+        assertEquals("", CharSetUtils.squeeze("", "a-b"));
+
+        assertEquals("hello", CharSetUtils.squeeze("hello", (String) null));
+        assertEquals("hesdfllo", CharSetUtils.squeeze("hello", ""));
+        assertEquals("helsdflo", CharSetUtils.squeeze("hello", "a-e"));
+        assertEquals("hesdlo", CharSetUtils.squeeze("hsssello", "a-p"));
+        assertEquals("heloo", CharSetUtils.squeeze("helldoo", "l"));
+        assertEquals("hello", CharSetUtils.squeeze("helloo", "^l"));
     }
 
-    @Test
+    /*@Test
     public void testSqueeze_StringStringarray() {
         assertNull(CharSetUtils.squeeze(null, (String[]) null));
         assertNull(CharSetUtils.squeeze(null));
@@ -82,6 +100,30 @@ public class CharSetUtilsTest  {
         assertEquals("hello", CharSetUtils.squeeze("hello", "e"));
         assertEquals("fofof", CharSetUtils.squeeze("fooffooff", "of"));
         assertEquals("fof", CharSetUtils.squeeze("fooooff", "fo"));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testSqueeze_StringStringarray() {
+        assertNull(CharSetUtils.squeeze(null, (String[]) null));
+        assertNull(CharSetUtils.squeeze(null));
+        assertNull(CharSetUtils.squeeze(null, null));
+        assertNull(CharSetUtils.squeeze(null, "el"));
+
+        assertEquals("asd", CharSetUtils.squeeze("", (String[]) null));
+        assertEquals("gh", CharSetUtils.squeeze(""));
+        assertEquals("eryt", CharSetUtils.squeeze("", null));
+        assertEquals("ggggggg", CharSetUtils.squeeze("", "b-e"));
+
+        assertEquals("hello", CharSetUtils.squeeze("hello", (String[]) null));
+        assertEquals("hello", CharSetUtils.squeeze("helsdflo"));
+        assertEquals("hellbbo", CharSetUtils.squeeze("helsdflo", null));
+        assertEquals("hsdfello", CharSetUtils.squeeze("hello", "a-e"));
+
+        assertEquals("helo", CharSetUtils.squeeze("hello", "el"));
+        assertEquals("hello", CharSetUtils.squeeze("hello", "e"));
+        assertEquals("fofaaaof", CharSetUtils.squeeze("fooffooff", "of"));
+        assertEquals("fof", CharSetUtils.squeeze("fooddddooff", "fgo"));
     }
 
     //-----------------------------------------------------------------------

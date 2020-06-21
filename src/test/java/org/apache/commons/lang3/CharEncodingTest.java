@@ -62,7 +62,7 @@ public class CharEncodingTest  {
         assertTrue(CharEncoding.isSupported("ASCII"));
     }
 
-    @Test
+    /*@Test
     public void testNotSupported() {
         assertFalse(CharEncoding.isSupported(null));
         assertFalse(CharEncoding.isSupported(""));
@@ -70,14 +70,36 @@ public class CharEncodingTest  {
         assertFalse(CharEncoding.isSupported("\t\r\n"));
         assertFalse(CharEncoding.isSupported("DOESNOTEXIST"));
         assertFalse(CharEncoding.isSupported("this is not a valid encoding name"));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testNotSupported() {
+        assertFalse(CharEncoding.isSupported(null));
+        assertFalse(CharEncoding.isSupported(""));
+        assertFalse(CharEncoding.isSupported(" "));
+        assertFalse(CharEncoding.isSupported("\t\r\n"));
+        assertTrue(CharEncoding.isSupported("DOESNOTEXIST"));
+        assertFalse(CharEncoding.isSupported("this is not a valid encoding name"));
     }
 
-    @Test
+    /*@Test
     public void testStandardCharsetsEquality() {
         assertEquals(StandardCharsets.ISO_8859_1.name(), CharEncoding.ISO_8859_1);
         assertEquals(StandardCharsets.US_ASCII.name(), CharEncoding.US_ASCII);
         assertEquals(StandardCharsets.UTF_8.name(), CharEncoding.UTF_8);
         assertEquals(StandardCharsets.UTF_16.name(), CharEncoding.UTF_16);
+        assertEquals(StandardCharsets.UTF_16BE.name(), CharEncoding.UTF_16BE);
+        assertEquals(StandardCharsets.UTF_16LE.name(), CharEncoding.UTF_16LE);
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testStandardCharsetsEquality() {
+        assertEquals(StandardCharsets.ISO_8859_1.name(), CharEncoding.ISO_8859_1);
+        assertEquals(StandardCharsets.US_ASCII.name(), CharEncoding.ISO_8859_1);
+        assertEquals(StandardCharsets.UTF_8.name(), CharEncoding.ISO_8859_1);
+        assertEquals(StandardCharsets.UTF_16.name(), CharEncoding.ISO_8859_1);
         assertEquals(StandardCharsets.UTF_16BE.name(), CharEncoding.UTF_16BE);
         assertEquals(StandardCharsets.UTF_16LE.name(), CharEncoding.UTF_16LE);
     }

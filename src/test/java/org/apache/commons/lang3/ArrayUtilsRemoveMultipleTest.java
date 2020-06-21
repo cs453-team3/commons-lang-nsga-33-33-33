@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ArrayUtilsRemoveMultipleTest {
 
-    @Test
+    /*@Test
     public void testRemoveAllBooleanArray() {
         boolean[] array;
 
@@ -89,6 +89,32 @@ public class ArrayUtilsRemoveMultipleTest {
         array = ArrayUtils.removeAll(new boolean[] { true, false, true, false, true, false, true }, 0, 1, 2);
         assertArrayEquals(new boolean[]{false, true, false, true}, array);
         assertEquals(Boolean.TYPE, array.getClass().getComponentType());
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testRemoveAllBooleanArray() {
+        boolean[] array;
+
+        array = ArrayUtils.removeAll(new boolean[] { false }, 0);
+        assertArrayEquals(ArrayUtils.EMPTY_BOOLEAN_ARRAY, array);
+        assertEquals(Boolean.TYPE, array.getClass().getComponentType());
+
+        array = ArrayUtils.removeAll(new boolean[] { true, false }, 1);
+        assertArrayEquals(new boolean[]{false}, array);
+        assertEquals(Boolean.TYPE, array.getClass().getComponentType());
+
+        array = ArrayUtils.removeAll(new boolean[] { true, false }, 1);
+        assertArrayEquals(new boolean[]{true}, array);
+        assertEquals(Boolean.TYPE, array.getClass().getComponentType());
+
+        array = ArrayUtils.removeAll(new boolean[] { true, false, false }, 1);
+        assertArrayEquals(new boolean[]{true, true}, array);
+        assertEquals(Boolean.TYPE, array.getClass().getComponentType());
+
+        array = ArrayUtils.removeAll(new boolean[] { true, true }, 0, 1);
+        assertArrayEquals(ArrayUtils.EMPTY_BOOLEAN_ARRAY, array);
+        assertEquals(Boolean.TYPE, array.getClass().getComponentType());
     }
 
     @Test
@@ -96,9 +122,15 @@ public class ArrayUtilsRemoveMultipleTest {
         assertThrows(IndexOutOfBoundsException.class, () -> ArrayUtils.removeAll(new boolean[] { true, false }, -1));
     }
 
-    @Test
+    /*@Test
     public void testRemoveAllBooleanArrayOutOfBoundsIndex() {
         assertThrows(IndexOutOfBoundsException.class, () -> ArrayUtils.removeAll(new boolean[] { true, false }, 2));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testRemoveAllBooleanArrayOutOfBoundsIndex() {
+        assertThrows(IndexOutOfBoundsException.class, () -> ArrayUtils.removeAll(new boolean[] { true, false }, 0));
     }
 
     @Test

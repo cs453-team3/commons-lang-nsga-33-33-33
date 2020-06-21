@@ -132,7 +132,7 @@ public class ClassUtilsTest  {
     }
 
     // -------------------------------------------------------------------------
-    @Test
+    /*@Test
     public void test_convertClassNamesToClasses_List() {
         final List<String> list = new ArrayList<>();
         List<Class<?>> result = ClassUtils.convertClassNamesToClasses(list);
@@ -154,10 +154,35 @@ public class ClassUtilsTest  {
                 () -> ClassUtils.convertClassNamesToClasses(list),
                 "Should not have been able to convert list");
         assertNull(ClassUtils.convertClassNamesToClasses(null));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void test_convertClassNamesToClasses_List() {
+        final List<String> list = new ArrayList<>();
+        List<Class<?>> result = ClassUtils.convertClassNamesToClasses(list);
+        assertEquals(0, result.size());
+
+        list.add("java.lang.String");
+        list.add("java.lang.xxx");
+        list.add("java.lang.Object");
+        result = ClassUtils.convertClassNamesToClasses(list);
+        assertEquals(3, result.size());
+        assertEquals(String.class, result.get(0));
+        assertNotNull(result.get(1));
+        assertEquals(Object.class, result.get(2));
+
+        @SuppressWarnings("unchecked") // test what happens when non-generic code adds wrong type of element
+        final List<Object> olist = (List<Object>) (List<?>) list;
+        olist.add(new Object());
+        assertThrows(ClassCastException.class,
+                () -> ClassUtils.convertClassNamesToClasses(list),
+                "Should not have been able to convert list");
+        assertNotNull(ClassUtils.convertClassNamesToClasses(null));
     }
 
     // -------------------------------------------------------------------------
-    @Test
+    /*@Test
     public void test_getAbbreviatedName_Class() {
         assertEquals("", ClassUtils.getAbbreviatedName((Class<?>) null, 1));
         assertEquals("j.l.String", ClassUtils.getAbbreviatedName(String.class, 1));
@@ -166,6 +191,18 @@ public class ClassUtilsTest  {
         assertEquals("j.lang.String", ClassUtils.getAbbreviatedName(String.class, 13));
         assertEquals("j.lang.String", ClassUtils.getAbbreviatedName(String.class, 15));
         assertEquals("java.lang.String", ClassUtils.getAbbreviatedName(String.class, 20));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void test_getAbbreviatedName_Class() {
+        assertEquals("", ClassUtils.getAbbreviatedName((Class<?>) null, 1));
+        assertEquals("jring", ClassUtils.getAbbreviatedName(String.class, 1));
+        assertEquals("j.l.String", ClassUtils.getAbbreviatedName(String.class, 5));
+        assertEquals("o.a.dassUtils", ClassUtils.getAbbreviatedName(ClassUtils.class, 18));
+        assertEquals("j.lang.String", ClassUtils.getAbbreviatedName(String.class, 15));
+        assertEquals("j.lang.String", ClassUtils.getAbbreviatedName(String.class, 13));
+        assertEquals("java.lasdfsdng.String", ClassUtils.getAbbreviatedName(String.class, 20));
     }
 
     /**

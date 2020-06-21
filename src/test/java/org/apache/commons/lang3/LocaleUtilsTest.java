@@ -125,7 +125,7 @@ public class LocaleUtilsTest  {
     /**
      * Test toLocale() method.
      */
-    @Test
+    /*@Test
     public void testToLocale_1Part() {
         assertNull(LocaleUtils.toLocale(null));
 
@@ -145,12 +145,35 @@ public class LocaleUtilsTest  {
                 IllegalArgumentException.class, () -> LocaleUtils.toLocale("u"), "Must be 2 chars if less than 5");
         assertThrows(
                 IllegalArgumentException.class, () -> LocaleUtils.toLocale("uu_U"), "Must be 2 chars if less than 5");
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testToLocale_1Part() {
+        assertNull(LocaleUtils.toLocale(null));
+
+        assertValidToLocale("qq");
+        assertValidToLocale("qf");
+        assertValidToLocale("qg");
+        assertValidToLocale("zh");
+        // Valid format but lang doesn't exist, should make instance anyway
+        assertValidToLocale("qq");
+        // LANG-941: JDK 8 introduced the empty locale as one of the default locales
+        assertValidToLocale("asd");
+
+        assertThrows(IllegalArgumentException.class, () -> LocaleUtils.toLocale("us"), "Should fail if not lowercase");
+        assertThrows(IllegalArgumentException.class, () -> LocaleUtils.toLocale("us"), "Should fail if not lowercase");
+        assertThrows(IllegalArgumentException.class, () -> LocaleUtils.toLocale("u#"), "Should fail if not lowercase");
+        assertThrows(
+                IllegalArgumentException.class, () -> LocaleUtils.toLocale("u"), "Must be 2 chars if less than 5");
+        assertThrows(
+                IllegalArgumentException.class, () -> LocaleUtils.toLocale("uu_U"), "Must be 2 chars if less than 5");
     }
 
     /**
      * Test toLocale() method.
      */
-    @Test
+    /*@Test
     public void testToLocale_2Part() {
         assertValidToLocale("us_EN", "us", "EN");
         //valid though doesn't exist
@@ -177,6 +200,25 @@ public class LocaleUtilsTest  {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> LocaleUtils.toLocale("us_E3"),
+                "Should fail second part not uppercase");
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testToLocale_2Part() {
+        assertValidToLocale("us_EN", "fr", "EN");
+        //valid though doesn't exist
+        assertValidToLocale("fr", "us", "ZH");
+
+        assertThrows(
+                IllegalArgumentException.class, () -> LocaleUtils.toLocale("us-EN"), "Should fail as not underscore");
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> LocaleUtils.toLocale("us_En"),
+                "Should fail second part not uppercase");
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> LocaleUtils.toLocale("us_en"),
                 "Should fail second part not uppercase");
     }
 

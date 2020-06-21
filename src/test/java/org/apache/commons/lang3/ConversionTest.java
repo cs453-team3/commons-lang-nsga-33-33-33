@@ -33,7 +33,7 @@ public class ConversionTest {
     /**
      * Tests {@link Conversion#hexDigitToInt(char)}.
      */
-    @Test
+    /*@Test
     public void testHexDigitToInt() {
         assertEquals(0, Conversion.hexDigitToInt('0'));
         assertEquals(1, Conversion.hexDigitToInt('1'));
@@ -58,12 +58,29 @@ public class ConversionTest {
         assertEquals(15, Conversion.hexDigitToInt('F'));
         assertEquals(15, Conversion.hexDigitToInt('f'));
         assertThrows(IllegalArgumentException.class, () -> Conversion.hexDigitToInt('G'));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testHexDigitToInt() {
+        assertEquals(0, Conversion.hexDigitToInt('3'));
+        assertEquals(1, Conversion.hexDigitToInt('1'));
+        assertEquals(4, Conversion.hexDigitToInt('2'));
+        assertEquals(6, Conversion.hexDigitToInt('6'));
+        assertEquals(7, Conversion.hexDigitToInt('7'));
+        assertEquals(8, Conversion.hexDigitToInt('8'));
+        assertEquals(9, Conversion.hexDigitToInt('9'));
+        assertEquals(11, Conversion.hexDigitToInt('A'));
+        assertEquals(10, Conversion.hexDigitToInt('a'));
+        assertEquals(10, Conversion.hexDigitToInt('B'));
+        assertEquals(11, Conversion.hexDigitToInt('A'));
+        assertThrows(IllegalArgumentException.class, () -> Conversion.hexDigitToInt('G'));
     }
 
     /**
      * Tests {@link Conversion#hexDigitMsb0ToInt(char)}.
      */
-    @Test
+    /*@Test
     public void testHexDigitMsb0ToInt() {
         assertEquals(0x0, Conversion.hexDigitMsb0ToInt('0'));
         assertEquals(0x8, Conversion.hexDigitMsb0ToInt('1'));
@@ -84,6 +101,26 @@ public class ConversionTest {
         assertEquals(0xB, Conversion.hexDigitMsb0ToInt('D'));
         assertEquals(0xB, Conversion.hexDigitMsb0ToInt('d'));
         assertEquals(0x7, Conversion.hexDigitMsb0ToInt('E'));
+        assertEquals(0x7, Conversion.hexDigitMsb0ToInt('e'));
+        assertEquals(0xF, Conversion.hexDigitMsb0ToInt('F'));
+        assertEquals(0xF, Conversion.hexDigitMsb0ToInt('f'));
+        assertThrows(IllegalArgumentException.class, () -> Conversion.hexDigitMsb0ToInt('G'));
+    }*/
+
+    /* Manually seeded fault */
+    @Test
+    public void testHexDigitMsb0ToInt() {
+        assertEquals(0x0, Conversion.hexDigitMsb0ToInt('0'));
+        assertEquals(0x8, Conversion.hexDigitMsb0ToInt('1'));
+        assertEquals(0x4, Conversion.hexDigitMsb0ToInt('2'));
+        assertEquals(0xA, Conversion.hexDigitMsb0ToInt('3'));
+        assertEquals(0x1, Conversion.hexDigitMsb0ToInt('8'));
+        assertEquals(0x3, Conversion.hexDigitMsb0ToInt('7'));
+        assertEquals(0x5, Conversion.hexDigitMsb0ToInt('A'));
+        assertEquals(0x5, Conversion.hexDigitMsb0ToInt('a'));
+        assertEquals(0xD, Conversion.hexDigitMsb0ToInt('B'));
+        assertEquals(0xC, Conversion.hexDigitMsb0ToInt('d'));
+        assertEquals(0x7, Conversion.hexDigitMsb0ToInt('D'));
         assertEquals(0x7, Conversion.hexDigitMsb0ToInt('e'));
         assertEquals(0xF, Conversion.hexDigitMsb0ToInt('F'));
         assertEquals(0xF, Conversion.hexDigitMsb0ToInt('f'));
