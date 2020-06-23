@@ -19,40 +19,51 @@
  *
  */
 pipeline {
-    agent {
-        node {
-            label 'ubuntu'
-        }
-    }
+    agent any
 
-    tools {
+    /*tools {
         maven 'Maven 3 (latest)'
         jdk 'JDK 1.8 (latest)'
-    }
+    }*/
 
     stages {
         stage('Build') {
             steps {
-                sh 'mvn'
+                sh '/home/tmr/apache-maven-3.6.3/bin/mvn clean compile -Drat.skip=true'
+                sh '/home/tmr/apache-maven-3.6.3/bin/mvn test-compile -Drat.skip=true'
+            }
+        }
+        stage('Algorithm') {
+            steps {
+                // restart: false/true to delete collected data about tests
+                step([$class: 'PrioraBuilder', mnCommitInterv: 60000, mxCommitInterv: 60000, prioraMethod: 'Greedy'])
+                //step([$class: 'PrioraBuilder', mnCommitInterv: 60000, mxCommitInterv: 60000, prioraMethod: 'NSGA', weights: [0.33, 0.33, 0.33]]) // failure, average runtime, run#
+                //step([$class: 'PrioraBuilder', mnCommitInterv: 60000, mxCommitInterv: 60000, prioraMethod: 'NSGA', weights: [0.5, 0.5, 0.0]])
+                //step([$class: 'PrioraBuilder', mnCommitInterv: 60000, mxCommitInterv: 60000, prioraMethod: 'NSGA', weights: [0.5, 0.3, 0.2]])
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './priora/exectests'
             }
             post {
                 always {
-                    junit(testResults: '**/surefire-reports/*.xml', allowEmptyResults: true)
+                    junit 'target/surefire-reports/*.xml'
                 }
             }
         }
-        stage('Deploy') {
+        /*stage('Deploy') {
             when {
                 branch 'master'
             }
             steps {
                 sh 'mvn deploy'
             }
-        }
+        }*/
     }
 
     // Send out notifications on unsuccessful builds.
-    post {
+    /*post {
         // If this build failed, send an email to the list.
         failure {
             script {
@@ -111,5 +122,5 @@ Check console output at <a href="${env.BUILD_URL}">${env.BUILD_URL}</a> to view 
                 }
             }
         }
-    }
+    }*/
 }

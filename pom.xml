@@ -564,6 +564,7 @@
   </distributionManagement>
 
   <properties>
+    <suffixName></suffixName>
     <argLine>-Xmx512m</argLine>
     <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -688,6 +689,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M4</version>
         <executions>
           <execution>
             <id>plain</id>
@@ -695,7 +697,7 @@
               <includes>
                 <include>**/*Test.java</include>
               </includes>
-              <runOrder>random</runOrder>
+              <reportNameSuffix>${suffixName}</reportNameSuffix>
             </configuration>
           </execution>
           <!-- <execution> <id>security-manager-test</id> <phase>integration-test</phase> <goals> <goal>test</goal> </goals> <configuration>
