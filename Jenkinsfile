@@ -29,8 +29,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean compile -Drat.skip=true'
-                sh 'mvn test-compile -Drat.skip=true'
+                sh '/home/tmr/apache-maven-3.6.3/bin/mvn clean compile -Drat.skip=true'
+                sh '/home/tmr/apache-maven-3.6.3/bin/mvn test-compile -Drat.skip=true'
             }
         }
         stage('Algorithm') {
