@@ -36,7 +36,7 @@ pipeline {
         stage('Algorithm') {
             steps {
                 // restart: false/true to delete collected data about tests
-                step([$class: 'PrioraBuilder', mnCommitInterv: 2000, mxCommitInterv: 2000, prioraMethod: 'Greedy'])
+                step([$class: 'PrioraBuilder', mnCommitInterv: 1300, mxCommitInterv: 1300, prioraMethod: 'Greedy'])
                 //step([$class: 'PrioraBuilder', mnCommitInterv: 60000, mxCommitInterv: 60000, prioraMethod: 'NSGA', weights: [0.33, 0.33, 0.33]]) // failure, average runtime, run#
                 //step([$class: 'PrioraBuilder', mnCommitInterv: 60000, mxCommitInterv: 60000, prioraMethod: 'NSGA', weights: [0.5, 0.5, 0.0]])
                 //step([$class: 'PrioraBuilder', mnCommitInterv: 60000, mxCommitInterv: 60000, prioraMethod: 'NSGA', weights: [0.5, 0.3, 0.2]])
